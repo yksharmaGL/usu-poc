@@ -1,0 +1,26 @@
+.wrapper {
+  padding: 1rem;
+  
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
+.viewButton {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: black;
+  color: white;
+  border-radius: 9999px;
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.viewButton:hover {
+  background-color: #333;
+  transform: translateY(-1px);
+}
