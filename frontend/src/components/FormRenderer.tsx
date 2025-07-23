@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import classes from "./FormRenderer.module.css"
 import { useState } from 'react';
-import { getAllForm } from '../services/services';
+import { getAllForm, getFormById } from '../services/services';
 
 export default function FormRenderer() {
   const [selectedFormId, setSelectedFormId] = useState<string | null>(null);
@@ -16,12 +16,11 @@ export default function FormRenderer() {
 
   const { data: formData, isLoading: isLoadingForm, isError: isFormError } = useQuery({
     queryKey: ["form", selectedFormId],
-    queryFn: async () => {
-      const response = await axios.get(`http://localhost:4000/api/form/meta_data/${selectedFormId}`);
-      return response.data;
-    },
+    queryFn: ({ signal }) => getFormById({ signal, selectedFormId }),
     enabled: !!selectedFormId
   })
+
+  console.log("formData", formData);
 
   let dropdownContent;
 
@@ -33,7 +32,6 @@ export default function FormRenderer() {
   }
 
   if (data) {
-    // const formJSON = typeof data[0].form_data === 'string' ? JSON.parse(data[0].form_data) : data[0].form_data;
     dropdownContent = <>
       <label htmlFor="form-select" className={classes.dropdownLabel}>Select Form:</label>
       <select name="form-select" id="form-select" onChange={(e: any) => {
@@ -49,6 +47,24 @@ export default function FormRenderer() {
     </>
   }
 
+  let formContent;
+
+  if (isLoadingForm) {
+    formContent = <div className={classes.center}><p>Loading form...</p></div>
+  }
+  if (isFormError) {
+    formContent = <div className={classes.center}><p>Error loading form content.</p></div>;
+  }
+
+  if (formData) {
+    const formJSON = typeof formData.form_data === 'string' ? JSON.parse(formData.form_data) : formData.form_data;
+    formContent = <FormRenderer
+      className={classes.formRenderer}
+      form={formJSON}
+      onSubmit={(submission: any) => console.log('Submitted:', submission)}
+      src={""}
+    />
+  }
 
   return (
     <div>
@@ -56,12 +72,7 @@ export default function FormRenderer() {
         {dropdownContent}
       </div>
       <div className={classes.wrapper}>
-        {/* <FormRenderer
-          className={classes.formRenderer}
-          form={formJSON}
-          onSubmit={(submission: any) => console.log('Submitted:', submission)}
-          src={""}
-        /> */}
+        {formContent}
       </div>
     </div>
   );
