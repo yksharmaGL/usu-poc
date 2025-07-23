@@ -1,8 +1,54 @@
 .wrapper {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 1rem;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgb(0 0 0 / 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.dropdownWrapper {
+  margin-bottom: 1rem;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px;
+  flex-direction: column;
+  width: 200px;
+}
+
+.dropdownLabel {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.formSelect {
+  padding: 6px 10px;
+  font-size: 1rem;
+  border: 1.5px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+  cursor: pointer;
+  min-width: 180px;
+  transition: border-color 0.3s ease;
+}
+
+.formSelect:focus {
+  border-color: #0070f3;
+  outline: none;
+}
+
+.dropdown {
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  outline-offset: 2px;
+  transition: border-color 0.3s ease;
+}
+
+.dropdown:focus {
+  border-color: #0070f3;
+  box-shadow: 0 0 0 3px rgba(0, 112, 243, 0.3);
 }
 
 .center {
