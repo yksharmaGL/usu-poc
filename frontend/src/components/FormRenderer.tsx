@@ -9,9 +9,16 @@ import { getAllForm, getFormById } from '../services/services';
 export default function FormRenderer() {
   const [selectedFormId, setSelectedFormId] = useState<string | null>(null);
   const FormRenderer: any = Form;
+
   const { data, isLoading, isError } = useQuery({
     queryKey: ['form'],
-    queryFn: getAllForm,
+    queryFn: async ({ signal })=> {
+      const data = await getAllForm({ signal });
+      setSelectedFormId(data?.[0]?.id);
+      return data;
+    },
+    staleTime: 0,
+    gcTime: 0,
   });
 
   const { data: formData, isLoading: isLoadingForm, isError: isFormError } = useQuery({
