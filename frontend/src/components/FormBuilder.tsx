@@ -15,7 +15,7 @@ export default function Builder() {
             return;
         }
 
-        await axios.post('http://localhost:4000/api/form', formSchema);
+        await axios.post('http://localhost:4000/api/form/meta_data', formSchema);
         alert('Form saved to backend');
     }
 
