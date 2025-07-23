@@ -1,20 +1,33 @@
 const express = require('express');
-const fs = require('fs');
-const path = require('path');
 const router = express.Router();
+const mysql = require('mysql2');
 
-const formPath = path.join(__dirname, '../data/form.json');
-
-// Get stored form JSON
-router.get('/form', (req, res) => {
-  const data = fs.readFileSync(formPath, 'utf8');
-  res.json(JSON.parse(data));
+const db = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'root',
+  database: 'usupoc',
+  port: 3306
 });
 
-// Save form JSON from builder
-router.post('/form', (req, res) => {
-  fs.writeFileSync(formPath, JSON.stringify(req.body, null, 2));
-  res.json({ message: 'Form saved successfully' });
+// Connect to MySql
+db.connect((err) => {
+  if(err) {
+    console.error('Error connecting to MySql: ' + err.stack);
+    return;
+  }
+  console.log('Connected to MySql');
+});
+
+router.get('/form/meta_data', (req, res) => {
+  db.query('SELECT * FROM form_metadata', (err, results) => {
+    if (err) {
+      console.error('Error executing query: ' + err.stack);
+      res.status(500).send('Error fetching metadata');
+      return;
+    }
+    res.json(results);
+  });
 });
 
 module.exports = router;
