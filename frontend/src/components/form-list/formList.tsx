@@ -3,12 +3,13 @@ import classes from "./formList.module.css";
 import { useQuery } from "@tanstack/react-query";
 import { getFormById, getFormSubmittedById } from "@/src/services/services";
 import { Form } from "@formio/react";
+import Modal from "react-modal";
 
 export default function FormList({ id }: any) {
     const FormRenderer: any = Form;
 
     const [selectedFormId, setSelectedFormId] = useState(null);
-    const [isPopupVisible, setIsPopupVisible] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const { data, isLoading, isError, error } = useQuery({
         queryKey: ["form", selectedFormId],
@@ -26,11 +27,6 @@ export default function FormList({ id }: any) {
         enabled: !!selectedFormId
     })
 
-    function onBtnClickHandler(id: any) {
-        setSelectedFormId(id)
-        setIsPopupVisible(true);
-    }
-
     let content;
     if (isLoading) {
         content = <div>Loading...</div>
@@ -39,6 +35,16 @@ export default function FormList({ id }: any) {
     if (isError) {
         content = <div>Error: {error.message || "Something went wrong"}</div>
     }
+
+    const openModal = (id: any) => {
+        setSelectedFormId(id); 
+        setIsModalOpen(true);  
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false); 
+        setSelectedFormId(null); 
+    };
 
     if (data) {
         const formJSON = typeof data.form_data === 'string' ? JSON.parse(data.form_data) : data.form_data;
@@ -55,14 +61,25 @@ export default function FormList({ id }: any) {
         <>
             <div className={classes.formCard}>
                 <div className={classes.formHeader}>{`Form ${id}`}</div>
-                <button className={classes.viewButton} onClick={() => onBtnClickHandler(id)}>View</button>
+                <button className={classes.viewButton} onClick={() => openModal(id)}>View</button>
             </div>
-            {isPopupVisible && <div className="popup-container" id="popupContainer">
-                <button className="popup-close" id="closePopup">&times;</button>
+            <Modal
+                isOpen={isModalOpen}
+                onRequestClose={closeModal}
+                contentLabel="Form Modal" 
+                className={classes.modalContent}  
+                overlayClassName={classes.modalOverlay} 
+                ariaHideApp={false} 
+            >
+                <button className={classes.modalClose} onClick={closeModal}>&times;</button>
 
-                <h2>Form Submiited data</h2>
+                <h2>Form Submitted data</h2>
+                <div className={classes.modalContent}>
                 {content}
-            </div>}
+                </div>
+            </Modal>
+
+            
         </>
     )
 }
