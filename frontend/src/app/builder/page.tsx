@@ -6,8 +6,11 @@ export default function BuilderPage() {
   return (
     <main className={styles.wrapper}>
       <div className={styles.buttonContainer}>
-        <Link href="/render" className={styles.viewButton}>
-          View Form
+        <Link href="/rendertemplates" className={`${styles.viewButton} px-1`}>
+          Form templates
+        </Link>
+        <Link href="/rendersubmittedforms" className={`${styles.viewButton} px-1`}>
+          Submitted forms
         </Link>
       </div>
       <FullBuilder />
