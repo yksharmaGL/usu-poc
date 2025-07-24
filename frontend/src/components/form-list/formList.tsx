@@ -52,17 +52,17 @@ export default function FormList({ id }: any) {
     }
 
     return (
-        <div className={classes.formCard}>
-            <div className={classes.formHeader}>{`Form ${id}`}</div>
-            <button className={classes.viewButton} onClick={() => onBtnClickHandler(id)}>View</button>
-
+        <>
+            <div className={classes.formCard}>
+                <div className={classes.formHeader}>{`Form ${id}`}</div>
+                <button className={classes.viewButton} onClick={() => onBtnClickHandler(id)}>View</button>
+            </div>
             {isPopupVisible && <div className="popup-container" id="popupContainer">
                 <button className="popup-close" id="closePopup">&times;</button>
 
                 <h2>Form Submiited data</h2>
                 {content}
             </div>}
-
-        </div>
+        </>
     )
 }
