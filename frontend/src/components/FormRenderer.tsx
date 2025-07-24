@@ -1,10 +1,10 @@
 'use client';
 import { Form } from '@formio/react';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import classes from "./FormRenderer.module.css"
 import { useState } from 'react';
-import { getAllForm, getFormById } from '../services/services';
+import { addFormData, getAllForm, getFormById } from '../services/services';
 
 export default function FormRenderer() {
   const [selectedFormId, setSelectedFormId] = useState<string | null>(null);
@@ -12,7 +12,7 @@ export default function FormRenderer() {
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ['form'],
-    queryFn: async ({ signal })=> {
+    queryFn: async ({ signal }) => {
       const data = await getAllForm({ signal });
       setSelectedFormId(data?.[0]?.id);
       return data;
@@ -26,6 +26,16 @@ export default function FormRenderer() {
     queryFn: ({ signal }) => getFormById({ signal, selectedFormId }),
     enabled: !!selectedFormId
   })
+
+  const { mutate,
+    isPending: isPendingEditEvent,
+    isError: isErrorEditEvent,
+    error: errorEditEvent
+  } =
+    useMutation({
+      mutationKey: ["form"],
+      mutationFn: addFormData
+    })
 
   console.log("formData", formData);
 
@@ -63,12 +73,24 @@ export default function FormRenderer() {
     formContent = <div className={classes.center}><p>Error loading form content.</p></div>;
   }
 
+  const onSubmitClickHandler = (formData: any) => {
+    if (formData?.data) {
+      const form = {
+        metadata_id: selectedFormId,
+        form_data: formData.data
+      }
+      mutate({ data: form })
+    }
+  }
+
   if (formData) {
     const formJSON = typeof formData.form_data === 'string' ? JSON.parse(formData.form_data) : formData.form_data;
     formContent = <FormRenderer
       className={classes.formRenderer}
       form={formJSON}
-      onSubmit={(submission: any) => console.log('Submitted:', submission)}
+      onSubmit={(submission: any) => {
+        onSubmitClickHandler(submission);
+      }}
       src={""}
     />
   }

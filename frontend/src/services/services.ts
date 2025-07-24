@@ -11,3 +11,15 @@ export async function getFormById({ signal, selectedFormId }: any) {
     await new Promise((resolve) => setTimeout(resolve, 500));
     return response.data;
 }
+
+export async function getFormSubmittedById({ signal, selectedFormId }: any) {
+    const response = await axios.get(`http://localhost:4000/api/form/submitted_forms/${selectedFormId}`, { signal: signal });
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    return response.data;
+}
+
+export async function addFormData({data}: any) {
+    const response = await axios.post(`http://localhost:4000/api/form/submitted_forms`,data);
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    return response.data;
+}

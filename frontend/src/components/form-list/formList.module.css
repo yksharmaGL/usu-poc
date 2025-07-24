@@ -1,0 +1,152 @@
+.formCard {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.formCard:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.formHeader {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+  flex-grow: 1; 
+}
+
+.viewButton {
+  padding: 6px 12px; 
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 20px; 
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.viewButton:hover {
+  background-color: #005bb5;
+}
+
+.viewButton:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 120, 243, 0.5);
+}
+
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); 
+  display: none; 
+  z-index: 1000;
+}
+
+
+.popup-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 400px; 
+  max-width: 90%; 
+  z-index: 1001;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.7);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.popup-container.active {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.popup-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #333;
+  cursor: pointer;
+}
+
+.popup-container.slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+.formRenderer {
+  width: 100%;
+  max-width: 800px;
+  padding: 30px;
+  border: 2px solid #ccc;
+  border-radius: 12px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.formRenderer input,
+.formRenderer textarea,
+.formRenderer select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1.5px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: border 0.2s ease-in-out;
+}
+
+.formRenderer input:focus,
+.formRenderer textarea:focus,
+.formRenderer select:focus {
+  border-color: #0070f3;
+  outline: none;
+  background-color: #fff;
+}
+
+.formRenderer button {
+  padding: 10px 20px;
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.formRenderer button:hover {
+  background-color: #005ac1;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translate(-50%, -50%) scale(0.7);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
