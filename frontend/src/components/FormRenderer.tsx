@@ -86,7 +86,6 @@ export default function FormRenderer() {
   if (formData) {
     const formJSON = typeof formData.form_data === 'string' ? JSON.parse(formData.form_data) : formData.form_data;
     formContent = <FormRenderer
-      className={classes.formRenderer}
       form={formJSON}
       onSubmit={(submission: any) => {
         onSubmitClickHandler(submission);

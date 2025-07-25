@@ -12,6 +12,7 @@
     "@formio/react": "^6.0.1",
     "@tanstack/react-query": "^5.28.0",
     "axios": "^1.6.8",
+    "bootstrap": "^5.3.7",
     "formiojs": "^4.21.7",
     "next": "15.4.1",
     "react": "18.2.0",
