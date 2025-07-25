@@ -4,12 +4,14 @@ import { useQuery } from "@tanstack/react-query";
 import { getFormById, getFormSubmittedById } from "@/src/services/form-services/formServices";
 import { Form } from "@formio/react";
 import Modal from "react-modal";
+import Link from "next/link";
 
 export default function FormList({ id }: any) {
     const FormRenderer: any = Form;
-
     const [selectedFormId, setSelectedFormId] = useState(null);
+    const [formId, setSetFormId] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isEdit, setIsEdit] = useState(false);
 
     const { data, isLoading, isError, error } = useQuery({
         queryKey: ["form", selectedFormId],
@@ -27,6 +29,8 @@ export default function FormList({ id }: any) {
         enabled: !!selectedFormId
     })
 
+
+
     let content;
     if (isLoading) {
         content = <div>Loading...</div>
@@ -37,13 +41,13 @@ export default function FormList({ id }: any) {
     }
 
     const openModal = (id: any) => {
-        setSelectedFormId(id); 
-        setIsModalOpen(true);  
+        setSelectedFormId(id);
+        setIsModalOpen(true);
     };
 
     const closeModal = () => {
-        setIsModalOpen(false); 
-        setSelectedFormId(null); 
+        setIsModalOpen(false);
+        setSelectedFormId(null);
     };
 
     if (data) {
@@ -57,29 +61,33 @@ export default function FormList({ id }: any) {
         />
     }
 
+   
+
+
+
     return (
         <>
             <div className={classes.formCard}>
                 <div className={classes.formHeader}>{`Form ${id}`}</div>
                 <button className={classes.viewButton} onClick={() => openModal(id)}>View</button>
+                <Link href={`/builder/${id}`}>Edit</Link>
             </div>
             <Modal
                 isOpen={isModalOpen}
                 onRequestClose={closeModal}
-                contentLabel="Form Modal" 
-                className={classes.modalContent}  
-                overlayClassName={classes.modalOverlay} 
-                ariaHideApp={false} 
+                contentLabel="Form Modal"
+                className={classes.modalContent}
+                overlayClassName={classes.modalOverlay}
+                ariaHideApp={false}
             >
                 <button className={classes.modalClose} onClick={closeModal}>&times;</button>
 
                 <h2>Form Submitted data</h2>
                 <div className={classes.modalContent}>
-                {content}
+                    {content}
                 </div>
             </Modal>
 
-            
         </>
     )
 }
