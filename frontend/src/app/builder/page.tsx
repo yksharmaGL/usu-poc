@@ -1,19 +1,19 @@
 import Link from "next/link";
-import FullBuilder from "./FullBuilder";
 import styles from "./page.module.css";
+import Builder from "@/src/components/form/formBuilder";
 
 export default function BuilderPage() {
   return (
     <main className={styles.wrapper}>
       <div className={styles.buttonContainer}>
-        <Link href="/rendertemplates" className={`${styles.viewButton} px-1`}>
+        <Link href="/formTemplates" className={`${styles.viewButton} px-1`}>
           Form templates
         </Link>
-        <Link href="/rendersubmittedforms" className={`${styles.viewButton} px-1`}>
+        <Link href="/submittedForms" className={`${styles.viewButton} px-1`}>
           Submitted forms
         </Link>
       </div>
-      <FullBuilder />
+      <Builder />
     </main>
   );
 }

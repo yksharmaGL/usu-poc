@@ -1,5 +1,5 @@
 'use client'
-import { getAllForm } from '@/src/services/services'
+import { getAllForm } from '@/src/services/form-services/formServices'
 import { useQuery } from '@tanstack/react-query'
 import classes from "./page.module.css";
 import FormList from '@/src/components/form-list/formList';

@@ -3,9 +3,10 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import HeaderPage from "../components/header/header";
 import FooterPage from "../components/footer/footer";
-import QueryProvider from "../components/QueryProvider";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import QueryProvider from "../lib/QueryProvider";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
