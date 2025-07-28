@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import HeaderPage from "../components/header/header";
-import FooterPage from "../components/footer/footer";
 
-import "bootstrap/dist/css/bootstrap.min.css";
 import QueryProvider from "../lib/QueryProvider";
+import "bootstrap/dist/css/bootstrap.min.css";
+import 'font-awesome/css/font-awesome.min.css';
+import HeaderPage from "../global-components/header/header";
+import FooterPage from "../global-components/footer/footer";
+
 
 
 const geistSans = Geist({

@@ -9,12 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@formio/contrib": "^2.0.0",
+    "@formio/js": "^5.0.1",
     "@formio/react": "^6.0.1",
     "@smastrom/react-rating": "^1.5.0",
     "@tanstack/react-query": "^5.28.0",
     "axios": "^1.6.8",
     "bootstrap": "^5.3.7",
+    "font-awesome": "^4.7.0",
     "formiojs": "^4.21.7",
+    "lodash": "^4.17.21",
     "next": "15.4.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",

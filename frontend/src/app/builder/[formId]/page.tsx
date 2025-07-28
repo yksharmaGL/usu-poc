@@ -1,6 +1,6 @@
 'use client'
-import { getFormById } from "@/src/services/form-services/formServices";
 import { FormBuilder } from "@formio/react";
+import { getFormById } from "@src/services/form-services/formServices";
 import { useQuery } from "@tanstack/react-query";
 import 'formiojs/dist/formio.full.min.css';
 

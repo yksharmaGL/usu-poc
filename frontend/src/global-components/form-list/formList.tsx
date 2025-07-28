@@ -1,10 +1,10 @@
 import { useState } from "react";
 import classes from "./formList.module.css";
 import { useQuery } from "@tanstack/react-query";
-import { getFormById, getFormSubmittedById } from "@/src/services/form-services/formServices";
 import { Form } from "@formio/react";
 import Modal from "react-modal";
 import Link from "next/link";
+import { getFormById, getFormSubmittedById } from "@src/services/form-services/formServices";
 
 export default function FormList({ id }: any) {
     const FormRenderer: any = Form;

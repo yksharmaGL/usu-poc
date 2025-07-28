@@ -1,6 +1,7 @@
+'use client'
 import Link from "next/link";
 import styles from "./page.module.css";
-import Builder from "@/src/components/form/formBuilder";
+import Builder from "@src/global-components/form/formBuilder";
 
 export default function BuilderPage() {
   return (

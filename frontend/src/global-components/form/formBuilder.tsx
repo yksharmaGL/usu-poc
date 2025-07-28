@@ -1,20 +1,25 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { FormBuilder } from '@formio/react';
+import { useState } from 'react';
+import dynamic from 'next/dynamic';
+
+const FormBuilder = dynamic(() => import('@formio/react').then(mod => mod.FormBuilder), {
+    ssr: false,
+});
 import axios from 'axios';
 import 'formiojs/dist/formio.full.min.css';
-import { registerCustomRatingComponent } from '@/src/lib/formio-init';
+import '@src/lib/registerCustomComponents';
 
 export default function Builder() {
     const FormBuilderComponent: any = FormBuilder
-    const [registered, setRegistered] = useState(false);
-    const [formSchema, setFormSchema] = useState<any>({ components: [] });
-
-    useEffect(() => {
-        registerCustomRatingComponent();
-        setRegistered(true);
-    }, [])
+    const [formSchema, setFormSchema] = useState<any>({
+        components: [{
+            "type": "mood",
+            "key": "userMood",
+            "label": "Your Mood",
+            "input": true
+        }]
+    });
 
     const saveForm = async () => {
         if (!formSchema || !formSchema.components) {
@@ -31,10 +36,10 @@ export default function Builder() {
             <h2 className="text-2xl font-bold mb-4">Form Builder</h2>
 
             <div className="border rounded-lg p-4 bg-white" style={{ minHeight: '600px' }}>
-                {registered && <FormBuilderComponent
+                <FormBuilderComponent
                     form={formSchema}
                     onChange={(schema: any) => setFormSchema(schema)}
-                />}
+                />
             </div>
 
             <button

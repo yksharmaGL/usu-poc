@@ -1,8 +1,8 @@
 'use client'
-import { getAllForm } from '@/src/services/form-services/formServices'
 import { useQuery } from '@tanstack/react-query'
 import classes from "./page.module.css";
-import FormList from '@/src/components/form-list/formList';
+import { getAllForm } from '@src/services/form-services/formServices';
+import FormList from '@src/global-components/form-list/formList';
 
 export default function RendeSubmittedFormsPage() {
 
