@@ -8,7 +8,9 @@ const FormBuilder = dynamic(() => import('@formio/react').then(mod => mod.FormBu
 });
 import axios from 'axios';
 import 'formiojs/dist/formio.full.min.css';
-import '@src/lib/registerCustomComponents';
+import registerCustomComponents from '@src/lib/registerCustomComponents';
+
+registerCustomComponents();
 
 export default function Builder() {
     const FormBuilderComponent: any = FormBuilder

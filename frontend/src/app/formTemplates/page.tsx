@@ -1,4 +1,5 @@
-import FormRenderer from "@/src/components/form/formRenderer";
+import FormRenderer from "@src/global-components/form/formRenderer";
+
 
 
 

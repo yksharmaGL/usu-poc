@@ -5,6 +5,7 @@ import "./globals.css";
 import QueryProvider from "../lib/QueryProvider";
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'font-awesome/css/font-awesome.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import HeaderPage from "../global-components/header/header";
 import FooterPage from "../global-components/footer/footer";
 
