@@ -1,11 +1,14 @@
-import image from "./ImageDraw/ImageDraw";
-import mood from "./mood/mood";
+
+import customSelect from "./custom-select/customSelect";
+import DataTableComponent from "./data-table/dataTable";
 import rating from "./rating/Rating";
-import resourceFieldsComponent from "./resourceFields/resourceFields";
+import SignatureComponent from "./signature/signature";
+import tagSelector from "./tag-selector/tagSelector";
 
 export default {
-    image,
     rating,
-    resourceFieldsComponent,
-    mood
+    tagSelector,
+    customSelect,
+    dataTable: DataTableComponent,
+    signature: SignatureComponent
 }

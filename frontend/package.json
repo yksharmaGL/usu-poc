@@ -14,6 +14,7 @@
     "@formio/react": "^6.0.1",
     "@smastrom/react-rating": "^1.5.0",
     "@tanstack/react-query": "^5.28.0",
+    "@types/signature_pad": "^2.3.6",
     "axios": "^1.6.8",
     "bootstrap": "^5.3.7",
     "bootstrap-icons": "^1.13.1",
@@ -24,7 +25,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-modal": "^3.16.3",
-    "react-rating-stars-component": "^2.2.0"
+    "react-rating-stars-component": "^2.2.0",
+    "signature_pad": "^5.0.10"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -35,6 +37,7 @@
     "@types/react-modal": "^3.16.3",
     "eslint": "^9",
     "eslint-config-next": "15.4.1",
+    "raw-loader": "^4.0.2",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

@@ -1,27 +1,25 @@
 'use client';
-
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 
-const FormBuilder = dynamic(() => import('@formio/react').then(mod => mod.FormBuilder), {
+const FormBuilder: any = dynamic(() => import('@formio/react').then(mod => mod.FormBuilder), {
     ssr: false,
 });
 import axios from 'axios';
 import 'formiojs/dist/formio.full.min.css';
 import registerCustomComponents from '@src/lib/registerCustomComponents';
 
-registerCustomComponents();
+
 
 export default function Builder() {
-    const FormBuilderComponent: any = FormBuilder
     const [formSchema, setFormSchema] = useState<any>({
-        components: [{
-            "type": "mood",
-            "key": "userMood",
-            "label": "Your Mood",
-            "input": true
-        }]
+        components: []
     });
+
+
+    useEffect(() => {
+        registerCustomComponents();
+    }, [])
 
     const saveForm = async () => {
         if (!formSchema || !formSchema.components) {
@@ -38,7 +36,7 @@ export default function Builder() {
             <h2 className="text-2xl font-bold mb-4">Form Builder</h2>
 
             <div className="border rounded-lg p-4 bg-white" style={{ minHeight: '600px' }}>
-                <FormBuilderComponent
+                <FormBuilder
                     form={formSchema}
                     onChange={(schema: any) => setFormSchema(schema)}
                 />
