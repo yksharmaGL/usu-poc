@@ -1,3 +1,4 @@
+'use client'
 import { DataTableRow, DataTableColumn, PaginationState, SortState, FilterState } from '../../../types/formio';
 
 interface DataTableTemplateContext {

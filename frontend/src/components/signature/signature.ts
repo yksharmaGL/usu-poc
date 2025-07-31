@@ -1,3 +1,4 @@
+'use client'
 import { Components, Utils } from '@formio/js';
 import editForm from './signature.form';
 import { SignatureComponentSchema, SignatureData } from '../../types/formio';

@@ -1,3 +1,4 @@
+'use client'
 import { Components } from '@formio/js';
 
 // Extend from the base Select component to inherit all functionality

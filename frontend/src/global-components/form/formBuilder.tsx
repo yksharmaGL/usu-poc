@@ -2,23 +2,37 @@
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 
-const FormBuilder: any = dynamic(() => import('@formio/react').then(mod => mod.FormBuilder), {
-    ssr: false,
-});
+const FormBuilder: any = dynamic(
+    () => import('@formio/react').then(mod => mod.FormBuilder),
+    {
+        ssr: false,
+        loading: () => (
+            <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '400px' }}>
+                <div className="spinner-border" role="status">
+                    <span className="visually-hidden">Loading Form Builder...</span>
+                </div>
+            </div>
+        )
+    }
+);
 import axios from 'axios';
 import 'formiojs/dist/formio.full.min.css';
-import registerCustomComponents from '@src/lib/registerCustomComponents';
+import registerCustomComponents from '@src/lib/form.io.registered';
 
 
 
 export default function Builder() {
+    const [isClient, setIsClient] = useState(false);
     const [formSchema, setFormSchema] = useState<any>({
         components: []
     });
 
 
     useEffect(() => {
-        registerCustomComponents();
+        setIsClient(true);
+        if (typeof window !== 'undefined') {
+            registerCustomComponents();
+        }
     }, [])
 
     const saveForm = async () => {
@@ -29,6 +43,15 @@ export default function Builder() {
 
         await axios.post('http://localhost:4000/api/form/meta_data', formSchema);
         alert('Form saved to backend');
+    }
+    if (!isClient) {
+        return (
+            <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '400px' }}>
+                <div className="spinner-border" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        );
     }
 
     return (
