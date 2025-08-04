@@ -14,14 +14,16 @@ export default async function registerCustomComponents(): Promise<void> {
       customSelectTmpl,
       dataTableTmpl,
       signatureTmpl,
-      rating
+      rating,
+      textEditor
     ] = await Promise.all([
       import('@formio/js'),
       import('../components'),
       import('@src/templates/bootstrap/customSelect'),
       import('@src/templates/bootstrap/data-table'),
       import('@src/templates/bootstrap/signature'),
-      import('@src/templates/bootstrap/rating')
+      import('@src/templates/bootstrap/rating'),
+      import('@src/templates/bootstrap/text-editor')
     ]);
 
     Formio.use({
@@ -32,8 +34,9 @@ export default async function registerCustomComponents(): Promise<void> {
           dataTable: dataTableTmpl.default,
           signature: signatureTmpl.default,
           rating: rating.default,
+          textEditor: textEditor.default
         }
-      }
+      },
     });
 
     isRegistered = true;

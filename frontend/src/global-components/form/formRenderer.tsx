@@ -1,13 +1,27 @@
 'use client';
-import { Form } from '@formio/react';
+import { useState } from 'react';
+
+const Form: any = dynamic(
+    () => import('@formio/react').then(mod => mod.Form),
+    {
+        ssr: false,
+        loading: () => (
+            <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '400px' }}>
+                <div className="spinner-border" role="status">
+                    <span className="visually-hidden">Loading Form Builder...</span>
+                </div>
+            </div>
+        )
+    }
+);
+
 import { useMutation, useQuery } from '@tanstack/react-query';
 import classes from "./FormRenderer.module.css"
-import { useState } from 'react';
 import { addFormData, getAllForm, getFormById } from '../../services/form-services/formServices';
+import dynamic from 'next/dynamic';
 
 export default function FormRenderer() {
   const [selectedFormId, setSelectedFormId] = useState<string | null>(null);
-  const FormRenderer: any = Form;
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ['form'],
@@ -57,7 +71,7 @@ export default function FormRenderer() {
         <option value="" disabled >---Choose a form---</option>
         {data.map((item: any) => {
           return (
-            <option value={item.id}>{`Form ${item.id}`}</option>
+            <option key={item.id} value={item.id}>{`Form ${item.id}`}</option>
           )
         })}
       </select>
@@ -85,7 +99,7 @@ export default function FormRenderer() {
 
   if (formData) {
     const formJSON = typeof formData.form_data === 'string' ? JSON.parse(formData.form_data) : formData.form_data;
-    formContent = <FormRenderer
+    formContent = <Form
       form={formJSON}
       onSubmit={(submission: any) => {
         onSubmitClickHandler(submission);
