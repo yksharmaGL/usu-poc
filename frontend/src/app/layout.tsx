@@ -14,6 +14,8 @@ import QueryProvider from "../lib/QueryProvider";
 import HeaderPage from "../global-components/header/header";
 import FooterPage from "../global-components/footer/footer";
 import HydrationSafeBody from "@src/global-components/HydrationSafeBody";
+import { ThemeProvider } from "../context/ThemeContext";
+import FormioThemeInitializer from "../components/FormioThemeInitializer";
 
 
 
@@ -46,7 +48,10 @@ export default function RootLayout({
         <QueryProvider>
           <HydrationSafeBody>
             <HeaderPage />
-            {children}
+              <ThemeProvider>
+                <FormioThemeInitializer />
+                {children}
+              </ThemeProvider>
             <FooterPage />
           </HydrationSafeBody>
         </QueryProvider>

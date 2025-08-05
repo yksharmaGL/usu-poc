@@ -1,4 +1,4 @@
-import { Components } from '@formio/js';
+import { Components } from 'formiojs';
 import editForm from './textEditor.form';
 
 const FieldComponent = (Components as any).components.field;
@@ -149,5 +149,3 @@ export default class TextEditorComponent extends FieldComponent {
     }
 }
 
-// Register custom component
-Components.addComponent('textEditor', TextEditorComponent);

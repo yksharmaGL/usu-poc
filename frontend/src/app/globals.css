@@ -24,3 +24,15 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.formio-label-dark { color: #fff; font-weight: bold; }
+.formio-input-dark { background: #222; color: #fff; border: 1px solid #555; }
+.formio-button-dark { background: #444; color: white; }
+.formio-textarea-dark { background: #222; color: #fff; border: 1px solid #555; }
+.formio-select-dark { background: #222; color: #fff; border: 1px solid #555; }
+
+.formio-label-default { color: #171717; }
+.formio-input-default { background: #fff; color: #171717; border: 1px solid #ccc; }
+.formio-button-default { background: #ddd; color: #222; }
+.formio-textarea-default { background: #fff; color: #171717; border: 1px solid #ccc; }
+.formio-select-default { background: #fff; color: #171717; border: 1px solid #ccc; }
