@@ -1,5 +1,5 @@
 
-import rating from "./rating/rating";
+import rating from "./rating/form";
 
 export default {
     rating,

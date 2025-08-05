@@ -1,13 +1,19 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import { Geist, Geist_Mono, Inter } from "next/font/google";
 
-import QueryProvider from "../lib/QueryProvider";
-import "bootstrap/dist/css/bootstrap.min.css";
-import 'font-awesome/css/font-awesome.min.css';
+// Bootstrap CSS
+import 'bootstrap/dist/css/bootstrap.min.css';
+// Bootstrap Icons CSS
 import 'bootstrap-icons/font/bootstrap-icons.css';
+// Font Awesome Configuration
+import '../lib/fontawesome';
+
+import "./globals.css";
+const inter = Inter({ subsets: ['latin'] });
+import QueryProvider from "../lib/QueryProvider";
 import HeaderPage from "../global-components/header/header";
 import FooterPage from "../global-components/footer/footer";
+import HydrationSafeBody from "@src/global-components/HydrationSafeBody";
 
 
 
@@ -34,12 +40,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        suppressHydrationWarning
+        className={inter.className}
       >
         <QueryProvider>
-          <HeaderPage />
-          {children}
-          <FooterPage />
+          <HydrationSafeBody>
+            <HeaderPage />
+            {children}
+            <FooterPage />
+          </HydrationSafeBody>
         </QueryProvider>
       </body>
     </html>

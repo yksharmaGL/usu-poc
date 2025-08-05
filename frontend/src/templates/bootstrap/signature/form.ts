@@ -1,3 +1,4 @@
+'use client'
 interface SignatureTemplateContext {
   component: any;
   isBuilderMode: boolean;
