@@ -48,10 +48,7 @@ export default function RootLayout({
         <QueryProvider>
           <HydrationSafeBody>
             <HeaderPage />
-              <ThemeProvider>
-                <FormioThemeInitializer />
                 {children}
-              </ThemeProvider>
             <FooterPage />
           </HydrationSafeBody>
         </QueryProvider>

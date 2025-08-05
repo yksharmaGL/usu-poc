@@ -3,6 +3,8 @@ import { useQuery } from '@tanstack/react-query'
 import classes from "./page.module.css";
 import { getAllForm } from '@src/services/form-services/formServices';
 import FormList from '@src/global-components/form-list/formList';
+import { ThemeProvider } from "@src/context/ThemeContext";
+import FormioThemeInitializer from "@src/components/FormioThemeInitializer";
 
 export default function RendeSubmittedFormsPage() {
 
@@ -29,8 +31,14 @@ export default function RendeSubmittedFormsPage() {
     }
 
     return (
-        <div className={classes.container}>
-            {content}
-        </div>
+
+        <ThemeProvider>
+            <FormioThemeInitializer>
+                <div className={classes.container}>
+                    {content}
+                </div>
+            </FormioThemeInitializer>
+        </ThemeProvider>
+
     )
 }

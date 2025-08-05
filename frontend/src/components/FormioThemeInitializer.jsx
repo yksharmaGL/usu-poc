@@ -1,16 +1,35 @@
-'use client';
-import { useEffect } from 'react';
-import { useTheme } from '../context/ThemeContext';
+'use client'
+import { useState, useEffect } from "react";
+import { useTheme } from '@src/context/ThemeContext';
 
-export default function FormioThemeInitializer() {
+export default function FormioThemeInitializer({ children }) {
   const theme = useTheme();
+  const [themeReady, setThemeReady] = useState(false);
 
   useEffect(() => {
-    import('../lib/formioPatchTheme').then(({ applyFormioTheme }) => {
-      applyFormioTheme(theme);
+    import('@src/lib/formioPatchTheme').then(({ applyFormioTheme }) => {
+      const { Formio } = require('formiojs');
+      if (Formio?.Templates?.bootstrap) {
+        applyFormioTheme(theme);
+        setThemeReady(true);
+      } else {
+        let attempts = 0;
+        const maxAttempts = 20;
+        const delay = 100;
+        const interval = setInterval(() => {
+          if (Formio?.Templates?.bootstrap) {
+            applyFormioTheme(theme);
+            setThemeReady(true);
+            clearInterval(interval);
+          } else if (++attempts >= maxAttempts) {
+            clearInterval(interval);
+            setThemeReady(true); // Fallback
+          }
+        }, delay);
+      }
     });
-    // Optionally, register custom components here too (see previous guidance)
   }, [theme]);
 
-  return null;
+  if (!themeReady) return <div>Preparing theme...</div>;
+  return children;
 }
