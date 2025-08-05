@@ -8,7 +8,6 @@ import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import HeaderPage from "../global-components/header/header";
 import FooterPage from "../global-components/footer/footer";
-import FormioThemeInitializer from "@src/components/FormioThemeInitializer";
 
 
 
@@ -37,8 +36,6 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <FormioThemeInitializer />
-
         <QueryProvider>
           <HeaderPage />
           {children}

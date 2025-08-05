@@ -5,7 +5,6 @@ import { Form } from "@formio/react";
 import Modal from "react-modal";
 import Link from "next/link";
 import { getFormById, getFormSubmittedById } from "@src/services/form-services/formServices";
-import ThemedFormRenderer from "@src/components/ThemedFormRenderer";
 
 export default function FormList({ id }: any) {
     const FormRenderer: any = Form;
@@ -54,7 +53,6 @@ export default function FormList({ id }: any) {
     if (data) {
         const formJSON = typeof data.form_data === 'string' ? JSON.parse(data.form_data) : data.form_data;
         content = <FormRenderer
-        // content = <ThemedFormRenderer
             className={classes.formRenderer}
             form={formJSON}
             onSubmit={(submission: any) => {
