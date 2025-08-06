@@ -31,14 +31,8 @@ export default function RendeSubmittedFormsPage() {
     }
 
     return (
-
-        <ThemeProvider>
-            <FormioThemeInitializer>
-                <div className={classes.container}>
-                    {content}
-                </div>
-            </FormioThemeInitializer>
-        </ThemeProvider>
-
+        <div className={classes.container}>
+            {content}
+        </div>
     )
 }
